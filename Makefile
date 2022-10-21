@@ -7,6 +7,7 @@ include config.mk
 REQ = util
 COM =\
 	components/battery\
+	components/cat\
 	components/cpu\
 	components/datetime\
 	components/disk\
@@ -21,7 +22,6 @@ COM =\
 	components/num_files\
 	components/ram\
 	components/run_command\
-	components/separator\
 	components/swap\
 	components/temperature\
 	components/uptime\
@@ -33,7 +33,7 @@ COM =\
 
 all: slstatus
 
-$(COM:=.o): config.mk $(REQ:=.h)
+$(COM:=.o): config.mk $(REQ:=.h) slstatus.h
 slstatus.o: slstatus.c slstatus.h arg.h config.h config.mk $(REQ:=.h)
 
 .c.o:
@@ -46,8 +46,7 @@ slstatus: slstatus.o $(COM:=.o) $(REQ:=.o)
 	$(CC) -o $@ $(LDFLAGS) $(COM:=.o) $(REQ:=.o) slstatus.o $(LDLIBS)
 
 clean:
-	rm -f slstatus slstatus.o $(COM:=.o) $(REQ:=.o)
-	echo "$(VERSION)"
+	rm -f slstatus slstatus.o "slstatus-$(VERSION).tar.gz" $(COM:=.o) $(REQ:=.o)
 
 dist:
 	rm -rf "slstatus-$(VERSION)"
@@ -69,7 +68,3 @@ install: all
 uninstall:
 	rm -f "$(DESTDIR)$(PREFIX)/bin/slstatus"
 	rm -f "$(DESTDIR)$(MANPREFIX)/man1/slstatus.1"
-
-poop: slstatus
-	mkdir -pv "$(HOME)/bin"
-	ln -sfv "$(CURDIR)/slstatus" "$(HOME)/bin"

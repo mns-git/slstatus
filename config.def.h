@@ -4,10 +4,11 @@
 const unsigned int interval = 1000;
 
 /* text to show if no value can be retrieved */
-static const char unknown_str[] = "n/a";
+static const char unknown_str[] = "-/-";
 
 /* maximum output string length */
 #define MAXLEN 2048
+
 
 /*
  * function            description                     argument (example)
@@ -69,26 +70,25 @@ static const char unknown_str[] = "n/a";
  */
 
 static const struct arg args[] = {
-    /* function format          argument */
-    
-    { wifi_perc,        "  %4s%%",       "wlp2s0"},
-    { netspeed_rx,      " %7s",           "wlp2s0"},
-    { netspeed_tx,      " %7s",           "wlp2s0"},
+    /* function         format            argument */
+    { wifi_perc,        "  %4s%%",      "wlp2s0"},
+    { netspeed_rx,      " %7s",           "wlp2s0"},
+    { netspeed_tx,      " ⇡⇣%7s",         "wlp2s0"},
 
-    { cpu_perc,         " | %4s%%",           NULL },    
-    { i8k_param,        " %4s°C",         "CPU_TEMP" },
-    { i8k_param,        " %5s",          "RIGHT_FAN_SPEED" }, 
+    { cpu_perc,         " ⋮ %4s%%",      NULL },
+    { i8k_param,        " %4s°C",         "CPU_TEMP" },
+    { i8k_param,        " %5s ",          "RIGHT_FAN_SPEED" },
 
-    { ram_perc,         " | %4s%%",       NULL },
+    { ram_perc,         " ⋮ %4s%%",      NULL },
 
-    { disk_perc,        " | %4s%%",       "/" },
-    { diskreads,        " %7s",            "sda" },
-    { diskwrites,       " %7s",            "sda" },
+    { disk_perc,        " ⋮ %4s%%",      "/" },
+    { diskreads,        " %7s",           "sda" },
+    { diskwrites,       " ⇡⇣%7s",         "sda" },
 
-    { battery_state,    " | %1s",             "BAT0" },
-    { battery_perc,     "%4s%%",             "BAT0" },
+    { vol_perc,         " ⋮ %4s%%",     "/dev/mixer" },
 
-    { vol_perc,         " | %4s%%",       "/dev/mixer" },
+    { battery_state,    " ⋮ %2s",          "BAT0" },
+    { battery_perc,     "%4s%%",           "BAT0" },
 
-    { datetime,         " | %16s ",        "%b-%d %I:%M %p" },
+    { datetime,         " ⋮ %15s ",        "%b-%d %I:%M %p" },
 };

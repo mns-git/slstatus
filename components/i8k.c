@@ -5,6 +5,9 @@
 #include "../util.h"
 
 #if defined(__linux__)
+
+	#define I8K_REC "/proc/i8k"
+
 	struct i8k_v1
 	{
 		char	FMT_VERSION[4];
@@ -21,18 +24,20 @@
 
 	int _read_i8k_record(struct i8k_v1 *rec)
 	{
-		return pscanf("/proc/i8k",
-					  	"%4s %4s %16s %d %d %d %d %d %d %d",
-					  	&rec->FMT_VERSION,
-					  	&rec->BIOS_VERSION,
-						&rec->MACHINE_ID,
-						&rec->CPU_TEMP,
-						&rec->LEFT_FAN_STATUS,
-						&rec->RIGHT_FAN_STATUS,
-						&rec->LEFT_FAN_SPEED,
-						&rec->RIGHT_FAN_SPEED,
-						&rec->AC_STATUS,
-						&rec->BUTTONS_STATUS);
+		return pscanf(
+			I8K_REC,
+			"%4s %4s %16s %d %d %d %d %d %d %d",
+			&rec->FMT_VERSION,
+			&rec->BIOS_VERSION,
+			&rec->MACHINE_ID,
+			&rec->CPU_TEMP,
+			&rec->LEFT_FAN_STATUS,
+			&rec->RIGHT_FAN_STATUS,
+			&rec->LEFT_FAN_SPEED,
+			&rec->RIGHT_FAN_SPEED,
+			&rec->AC_STATUS,
+			&rec->BUTTONS_STATUS
+		);
 	}
 
 	const char*	i8k_param(const char *name)

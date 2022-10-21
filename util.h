@@ -1,9 +1,11 @@
 /* See LICENSE file for copyright and license details. */
 #include <stdint.h>
 
-extern char buf[1024];
+#define BUFF_LENGTH 1024
 
-#define LEN(x) (sizeof (x) / sizeof *(x))
+extern char buf[BUFF_LENGTH];
+
+#define LEN(x) (sizeof(x) / sizeof((x)[0]))
 
 extern char *argv0;
 
