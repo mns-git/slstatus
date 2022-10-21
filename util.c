@@ -103,17 +103,17 @@ fmt_human(uintmax_t num, int base)
 	const char *prefix_1024[] = { " ", "K", "M", "G", "T", "P", "E", "Z", "Y" };
 
 	switch (base) {
-	case 1000:
-		prefix = prefix_1000;
-		prefixlen = LEN(prefix_1000);
-		break;
-	case 1024:
-		prefix = prefix_1024;
-		prefixlen = LEN(prefix_1024);
-		break;
-	default:
-		warn("fmt_human: Invalid base");
-		return NULL;
+		case 1000:
+			prefix = prefix_1000;
+			prefixlen = LEN(prefix_1000);
+			break;
+		case 1024:
+			prefix = prefix_1024;
+			prefixlen = LEN(prefix_1024);
+			break;
+		default:
+			warn("fmt_human: Invalid base");
+			return NULL;
 	}
 
 	scaled = num;
