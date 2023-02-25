@@ -71,24 +71,25 @@ static const char unknown_str[] = "-/-";
 
 static const struct arg args[] = {
     /* function         format            argument */
-    { wifi_perc,        "  %4s%%",      "wlp2s0"},
-    { netspeed_rx,      " %7s",           "wlp2s0"},
-    { netspeed_tx,      " ⇡⇣%7s",         "wlp2s0"},
+    { wifi_perc,        " %4s%%",      "wlp2s0"},
+    { netspeed_rx,      " %6s ",          "wlp2s0"},
+    { netspeed_tx,      " ⇡⇣ %-6s",       "wlp2s0"},
 
     { cpu_perc,         " ⋮ %4s%%",      NULL },
     { i8k_param,        " %4s°C",         "CPU_TEMP" },
+    { i8k_param,        " %5s",           "RIGHT_FAN_SPEED" },
     { i8k_param,        " %5s ",          "RIGHT_FAN_SPEED" },
 
     { ram_perc,         " ⋮ %4s%%",      NULL },
 
     { disk_perc,        " ⋮ %4s%%",      "/" },
-    { diskreads,        " %7s",           "sda" },
-    { diskwrites,       " ⇡⇣%7s",         "sda" },
+    { diskreads,        " %6s ",          "sda" },
+    { diskwrites,       " ⇡⇣ %-6s",       "sda" },
 
-    { vol_perc,         " ⋮ %4s%%",     "/dev/mixer" },
+    { vol_perc,         " ⋮ %4s%%",      "/dev/mixer" },
 
     { battery_state,    " ⋮ %2s",          "BAT0" },
-    { battery_perc,     "%4s%%",           "BAT0" },
+    { battery_perc,     "%4s%%",          "BAT0" },
 
     { datetime,         " ⋮ %15s ",        "%b-%d %I:%M %p" },
 };
